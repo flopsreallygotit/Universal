@@ -3,11 +3,11 @@
 #include <string.h>
 #include <malloc.h>
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #include "universalUtils.h"
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void logf (const char *file, const int line, const char *function,
            FILE *output, const char *format, ...)
@@ -23,7 +23,7 @@ void logf (const char *file, const int line, const char *function,
     va_end(args);
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void *recalloc (void *ptr, size_t newSize) 
 {
@@ -38,7 +38,7 @@ void *recalloc (void *ptr, size_t newSize)
     return ptr;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 char *stralloccat(const char *dst, const char *src)
 {
@@ -50,7 +50,7 @@ char *stralloccat(const char *dst, const char *src)
     return string;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 int systemf (const char *format, ...)
 {
@@ -66,11 +66,12 @@ int systemf (const char *format, ...)
     return system(str);
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-int differenceSign (double firstNumber, double secondNumber)
+int differenceSign (double firstNumber, 
+                    double secondNumber)
 {
-    const double epsilon = 1e-9;
+    static const double epsilon = 1e-9;
 
     const double difference = firstNumber - secondNumber;
 
@@ -82,9 +83,10 @@ int differenceSign (double firstNumber, double secondNumber)
     return 0;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-double dmin (double firstNumber, double secondNumber)
+double dmin (double firstNumber, 
+             double secondNumber)
 {
     if (differenceSign(firstNumber, secondNumber) >= 0)
         return firstNumber;
@@ -92,7 +94,7 @@ double dmin (double firstNumber, double secondNumber)
     return secondNumber;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const char *simpleCommandLineParser (const int argc, const char *argv[])
 {
@@ -101,15 +103,11 @@ const char *simpleCommandLineParser (const int argc, const char *argv[])
                NULL);
 
     CHECKERROR(argc != 1 &&
-               "You haven't entered file name."
-               "Example: ./e++ aboba.awp", 
+               "You need to enter only one argument."
+               "Example: ./main flopsreallygot.it", 
                NULL);
-
-    CHECKWARNING(argc == 2 &&
-                 "You have entered more than two arguments."
-                 "Only second argument is taken as the filename.");
 
     return argv[1];
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

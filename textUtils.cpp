@@ -1,11 +1,11 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #include "textUtils.h"
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 static void getSymbolsCount (text *Text, FILE *file)
 {
@@ -16,11 +16,11 @@ static void getSymbolsCount (text *Text, FILE *file)
     return;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 static void getLineCount (text *Text)
 {
-    Text->lineCount = 1; // We have a guarantee that file contain minimum 1 line.
+    Text->lineCount = 1; // We have a guarantee that file contains minimum 1 line.
 
     for (size_t buffer_idx = 0; Text->buffer[buffer_idx] != '\0'; buffer_idx++)
         if (Text->buffer[buffer_idx] == '\n')
@@ -29,7 +29,7 @@ static void getLineCount (text *Text)
     return;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 static ISERROR createBuffer (text *Text, FILE *file)
 {
@@ -46,7 +46,7 @@ static ISERROR createBuffer (text *Text, FILE *file)
     return NOTERROR;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 static ISERROR createLines (text *Text)
 {
@@ -60,7 +60,7 @@ static ISERROR createLines (text *Text)
 
     Text->lines[0] = Text->buffer;
 
-    size_t line_idx   = 1; // We already filled zero index 
+    size_t line_idx   = 1; // We've already filled zero index 
     size_t buffer_idx = 0;
 
     while (Text->buffer[buffer_idx] != '\0')
@@ -78,7 +78,7 @@ static ISERROR createLines (text *Text)
     return NOTERROR;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 text *textConstructor (const char *input)
 {
@@ -118,7 +118,7 @@ text *textConstructor (const char *input)
     return Text;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void textDestructor (text *Text)
 {
@@ -140,7 +140,7 @@ void textDestructor (text *Text)
     return;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void printLine (text *Text, size_t line_idx)
 {
@@ -154,8 +154,10 @@ void printLine (text *Text, size_t line_idx)
         return;
     }
 
-    for (size_t symbol_idx = 0; Text->lines[line_idx][symbol_idx] != '\n' &&
-         Text->lines[line_idx][symbol_idx] != '\0'; symbol_idx++)
+    for (size_t symbol_idx = 0; 
+         Text->lines[line_idx][symbol_idx] != '\n' &&
+         Text->lines[line_idx][symbol_idx] != '\0'; 
+         symbol_idx++)
          putchar(Text->lines[line_idx][symbol_idx]);
 
     putchar('\n');
@@ -174,4 +176,4 @@ void printText (text *Text)
     return;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
