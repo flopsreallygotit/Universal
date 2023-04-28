@@ -80,7 +80,7 @@ static ISERROR createLines (text *Text)
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-text *textConstructor (const char *input)
+text *textConstructor (const char *input, bool makeLines)
 {
     CHECKERROR(input != NULL &&
                "Can't create text struct with null input.",
@@ -109,9 +109,15 @@ text *textConstructor (const char *input)
                "Can't create buffer for text struct.", 
                NULL);
 
-    CHECKERROR(createLines(Text) == NOTERROR &&
-               "Can't create lines buffer from text struct.", 
-               NULL);
+    if (makeLines)
+    {
+        CHECKERROR(createLines(Text) == NOTERROR &&
+                   "Can't create lines buffer from text struct.", 
+                   NULL);
+    }
+
+    else
+        Text->lines = NULL;
 
     fclose(file);
 
@@ -135,7 +141,6 @@ void textDestructor (text *Text)
     Text->lineCount    = 0;
 
     free(Text);
-    Text = NULL;
 
     return;
 }
@@ -145,6 +150,9 @@ void textDestructor (text *Text)
 void printLine (text *Text, size_t line_idx)
 {
     if (Text == NULL)
+        return;
+
+    if (Text->lines == NULL)
         return;
 
     if (line_idx >= Text->lineCount)

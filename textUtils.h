@@ -22,12 +22,13 @@ typedef struct text
 
 /// @brief Creates text struct.
 /// @param input Name of input file.
+/// @param makeLines Bool flag. If it is true, then text struct will contain array with pointers to the start of lines.
 
-text *textConstructor (const char *input);
+text *textConstructor (const char *input, bool makeLines);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Deconstructs latex struct.
+/// @brief Deletes latex struct.
 /// @param Text Pointer to text struct.
 
 void textDestructor (text *Text);
