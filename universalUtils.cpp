@@ -30,10 +30,8 @@ void *recalloc (void *ptr, size_t newSize)
     size_t oldSize = malloc_usable_size(ptr);
 
     ptr = realloc(ptr, newSize);
-    char *endptr = (char *) ptr;
 
-    for (size_t idx = oldSize; idx < newSize; idx++) 
-        endptr[idx] = 0;
+    memset(ptr, 0, newSize - oldSize);
 
     return ptr;
 }
@@ -54,10 +52,12 @@ char *stralloccat(const char *dst, const char *src)
 
 int systemf (const char *format, ...)
 {
+    static const size_t bufferSize = 512;
+
     va_list arg;
     va_start(arg, format);
 
-    char str[512] = "";
+    char str[bufferSize] = "";
 
     vsprintf(str, format, arg); 
 
@@ -73,14 +73,10 @@ int differenceSign (double firstNumber,
 {
     static const double epsilon = 1e-9;
 
-    const double difference = firstNumber - secondNumber;
+    double difference = abs(firstNumber - secondNumber);
 
-    if (difference > epsilon)
-        return  1;
-    if (difference < -epsilon)
-        return -1;
-    
-    return 0;
+    return difference < epsilon * abs(firstNumber) ||
+           difference < epsilon * abs(secondNumber);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

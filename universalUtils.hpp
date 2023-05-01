@@ -31,7 +31,7 @@
 #define HTMLBLUE      "<p style=\"color:blue;\">"
 #define HTMLRED       "<p style=\"color:red;\">"
 
-#define VERDANA       "<p style=\"font-family:verdana; font-size:200%%;\">"
+#define HTMLVERDANA   "<p style=\"font-family:verdana; font-size:200%%;\">"
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -120,7 +120,7 @@ enum ISERROR
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Puts message in file
+/// @brief Put message in file
 
 #define LOG(file, format, ...)                          \
     do                                                  \
@@ -132,14 +132,14 @@ enum ISERROR
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Puts warning in stderr
+/// @brief Put warning in stderr
 /// @brief Warning message
 
 #define PUTWARNING(warning)                                                                 \
     fprintf(stderr, BOLD YELLOW "Warning in file %s:%d line in function: %s! %s;\n" RESET,  \
             __FILE__, __LINE__, __PRETTY_FUNCTION__, warning)
 
-/// @brief Puts warning if condition is false
+/// @brief Put warning if condition is false
 /// @param condition Condition that you need to check
 
 #define CHECKWARNING(condition)     \
@@ -152,13 +152,13 @@ enum ISERROR
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Puts error in stderr
+/// @brief Put error in stderr
 
 #define PUTERROR(error)                                                                 \
     fprintf(stderr, BOLD RED "Error in file %s:%d line in function: %s! %s;\n" RESET,   \
             __FILE__, __LINE__, __PRETTY_FUNCTION__, error)                             
 
-/// @brief Returns returnValue if condition is wrong
+/// @brief Return returnValue if condition is wrong
 /// @param condition Condition that you need to check
 /// @param value Value that function returns
 
@@ -186,7 +186,7 @@ enum ISERROR
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Outputs message with printf format in file
+/// @brief Output message with printf format in file
 /// @param file File, where from function was called
 /// @param line Line, where from function was called
 /// @param function Function, where from function was called
@@ -198,7 +198,7 @@ void logf (const char *file, const int line, const char *function,
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Reallocates memory for pointer and zeroes it
+/// @brief Reallocate memory for pointer and zeroes it
 /// @param ptr Pointer
 /// @param newSize New pointer memory size
 
@@ -206,7 +206,7 @@ void *recalloc (void *ptr, size_t newSize);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Concatenates two strings with memory allocation
+/// @brief Concatenate two strings with memory allocation
 /// @param dest Destination string
 /// @param src Source string
 
@@ -214,7 +214,7 @@ char *stralloccat (const char *dest, const char *src);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-/// @brief Calls system with formatted text
+/// @brief Call system with formatted text
 /// @param format Format of arguments (printf)
 
 int systemf (const char *format, ...);
@@ -233,7 +233,7 @@ double dmin (double firstNumber, double secondNumber);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Parses command line and get name of file out of it
+/// @brief Parse command line and get name of file out of it
 /// @param argc Number of command line arguments
 /// @param argv Coontent of command line arguments
 
