@@ -198,11 +198,11 @@ void logf (const char *file, const int line, const char *function,
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/// @brief Reallocate memory for pointer and zeroes it
-/// @param ptr Pointer
+/// @brief Reallocate memory for pointer and zero it
+/// @param pointer Pointer to allocated memory
 /// @param newSize New pointer memory size
 
-void *recalloc (void *ptr, size_t newSize);
+void *recalloc (void *pointer, size_t newSize);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -237,6 +237,6 @@ double dmin (double firstNumber, double secondNumber);
 /// @param argc Number of command line arguments
 /// @param argv Coontent of command line arguments
 
-const char *simpleCommandLineParser (const int argc, const char *argv[]);
+const char *checkFirstArgvAndGetIt (const int argc, const char *argv[]);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

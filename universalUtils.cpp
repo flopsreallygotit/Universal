@@ -25,15 +25,21 @@ void logf (const char *file, const int line, const char *function,
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-void *recalloc (void *ptr, size_t newSize) 
+void *recalloc (void *pointer, size_t newSize) 
 {
-    size_t oldSize = malloc_usable_size(ptr);
+    size_t oldSize = malloc_usable_size(pointer);
 
-    ptr = realloc(ptr, newSize);
+    pointer = realloc(pointer, newSize);
 
-    memset(ptr, 0, newSize - oldSize);
+    CHECKERROR(pointer != NULL &&
+               "Can't reallocate memory for pointer.",
+               NULL);
 
-    return ptr;
+    char *newPartPointer = (char *) pointer + oldSize;
+
+    memset(newPartPointer, 0, newSize - oldSize);
+
+    return pointer;
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,7 +98,7 @@ double dmin (double firstNumber,
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-const char *simpleCommandLineParser (const int argc, const char *argv[])
+const char *checkFirstArgvAndGetIt (const int argc, const char *argv[])
 {
     CHECKERROR(argv != NULL &&
                "Argv pointer can't be NULL.",

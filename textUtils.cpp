@@ -53,19 +53,15 @@ static ISERROR createLines (text_t *text)
 
     text->lines[0] = text->buffer;
 
-    size_t lineIndex   = 1; // We've already filled zero index 
-    size_t bufferIndex = 0;
-    while (text->buffer[bufferIndex] != '\0')
-    {
+    size_t lineIndex = 1; // We've already filled zero index 
+    for (size_t bufferIndex = 0; text->buffer[bufferIndex] != '\0'; bufferIndex++)
         if (text->buffer[bufferIndex] == '\n')
         {
             text->lines[lineIndex] = text->buffer + bufferIndex + 1;
 
             lineIndex++;
         }
-
-        bufferIndex++;
-    }
+    
 
     return NOTERROR;
 }
