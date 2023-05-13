@@ -132,12 +132,22 @@ enum ISERROR
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#define PUTMESSAGE(message)                             \
+    fprintf(stderr, BOLD MAGENTA "%s:%d:\t%s;\n" RESET, \
+            __FILE__, __LINE__, message)
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 /// @brief Put warning in stderr
 /// @brief Warning message
 
 #define PUTWARNING(warning)                                                                 \
     fprintf(stderr, BOLD YELLOW "Warning in file %s:%d line in function: %s! %s;\n" RESET,  \
             __FILE__, __LINE__, __PRETTY_FUNCTION__, warning)
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#ifdef DEBUG
 
 /// @brief Put warning if condition is false
 /// @param condition Condition that you need to check
@@ -150,13 +160,23 @@ enum ISERROR
     }                               \
     while (0)
 
+#else
+
+#define CHECKWARNING(condition)
+
+#endif
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 /// @brief Put error in stderr
 
 #define PUTERROR(error)                                                                 \
     fprintf(stderr, BOLD RED "Error in file %s:%d line in function: %s! %s;\n" RESET,   \
-            __FILE__, __LINE__, __PRETTY_FUNCTION__, error)                             
+            __FILE__, __LINE__, __PRETTY_FUNCTION__, error)
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#ifdef DEBUG
 
 /// @brief Return returnValue if condition is wrong
 /// @param condition Condition that you need to check
@@ -172,6 +192,12 @@ enum ISERROR
         }                               \
     }                                   \
     while (0)
+
+#else
+
+#define CHECKERROR(condition, value)
+
+#endif
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
